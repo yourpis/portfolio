@@ -14,8 +14,16 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Tubagus Dafa | Next-Gen Developer Platform",
-  description: "Bridging the gap between Low-Level Hardware Architecture and High-Performance Next.js Ecosystems.",
+  title: "Tubagus Dafa | Full-Stack & Embedded Engineer",
+  description: "Tubagus Dafa is a Full-Stack Software & Hardware Engineer based in Jakarta, crafting robust systems, intuitive interfaces, and scalable digital experiences.",
+  openGraph: {
+    siteName: "Tubagus Dafa",
+    type: "website",
+    locale: "en_US",
+  },
+  twitter: {
+    card: "summary_large_image",
+  }
 };
 
 export default function RootLayout({
