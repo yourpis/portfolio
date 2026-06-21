@@ -1,65 +1,76 @@
-import Image from "next/image";
+import Link from "next/link";
+import prisma from "@/lib/prisma";
 
-export default function Home() {
+// This is a Server Component - it fetches data securely on the server!
+export default async function Home() {
+  // Fetch all projects from Neon, ordered by newest first
+  const items = await prisma.project.findMany({
+    orderBy: { createdAt: "desc" },
+  });
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+    <main className="min-h-screen bg-[#050505] text-[#ededed] font-sans selection:bg-white/20">
+      
+      {/* Subtle glowing background mesh */}
+      <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/40 via-[#050505] to-[#050505] pointer-events-none" />
+
+      <div className="relative z-10 flex flex-col items-center">
+        
+        {/* Hero Section */}
+        <section className="mt-32 mb-24 text-center max-w-4xl px-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-300 font-medium tracking-wide mb-8">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            System Online
+          </div>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-neutral-500 mb-6 pb-2">
+            The Developer.<br />Reimagined.
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="text-lg md:text-xl text-neutral-400 font-light tracking-wide max-w-2xl mx-auto">
+            Bridging the gap between Low-Level Hardware Architecture and High-Performance Next.js Ecosystems.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </section>
+
+        {/* Dynamic Bento Box Grid */}
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl w-full px-6 pb-32">
+          {items.map((item) => (
+            <Link href={`/projects/${item.slug}`} key={item.id} className="group outline-none">
+              <div className="h-full flex flex-col p-6 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 relative overflow-hidden">
+                
+                {/* Hover Glow Effect */}
+                <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+                {/* Card Header (Type & Status) */}
+                <div className="flex justify-between items-center mb-6">
+                  <span className="text-[10px] font-mono text-neutral-400 uppercase tracking-widest border border-white/10 px-2 py-1 rounded-md">
+                    {item.type}
+                  </span>
+                  <span className="text-[10px] uppercase tracking-widest flex items-center gap-1 text-neutral-500">
+                    {item.status}
+                  </span>
+                </div>
+
+                {/* Card Body */}
+                <h3 className="text-2xl font-semibold mb-2 group-hover:text-white text-neutral-200 transition-colors">
+                  {item.title}
+                </h3>
+                <p className="text-neutral-500 text-sm font-light mb-8">
+                  {item.role} • {item.subcategory}
+                </p>
+
+                {/* Card Footer */}
+                <div className="mt-auto flex items-center text-sm font-medium text-neutral-400 group-hover:text-white transition-colors">
+                  Explore Protocol 
+                  <span className="ml-2 transform group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+                </div>
+
+              </div>
+            </Link>
+          ))}
+        </section>
+        
+      </div>
+    </main>
   );
 }

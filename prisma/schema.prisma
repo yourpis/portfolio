@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Project {
+  id           String   @id @default(uuid())
+  title        String
+  slug         String   @unique
+  
+  // Dropdown Categories
+  type         String   // e.g., "Experience", "Project", "Certification"
+  subcategory  String   // e.g., "Backend Engineering", "Full-stack"
+  status       String   // e.g., "Ongoing", "Completed", "Production"
+  
+  // Dates (Stored as strings to allow "Present" or "2024-10")
+  dateStart    String?
+  dateEnd      String?
+  
+  // Details
+  role         String?
+  organization String?
+  url          String?        // Live links (e.g., Warung Dafa)
+  credentialId String?        // For certifications (e.g., CS50, Red Hat)
+  compensation String?        // e.g., "remunerated" (TEDxUI, Namlapan)
+  achievement  String?        // e.g., "Best Intern Biro PSDM"
+  
+  // The Markdown Content & Media
+  content      String   @db.Text
+  media        String?  // URL to image or video
+  
+  // Admin Analytics
+  views        Int      @default(0)
+  
+  // Auto-timestamps
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
