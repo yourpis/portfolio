@@ -2,14 +2,24 @@
 
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { put } from "@vercel/blob"; // Import the Vercel Blob upload function
 
-// This function runs entirely on the server
 export async function createProject(formData: FormData, content: string) {
   try {
     const title = formData.get("title") as string;
-    
-    // Auto-generate a slug (e.g., "F1 Race Game" -> "f1-race-game")
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+
+    // Handle Image Upload to Vercel Blob
+    const mediaFile = formData.get("mediaFile") as File;
+    let mediaUrl = null;
+
+    if (mediaFile && mediaFile.size > 0) {
+      // Upload the file securely to Vercel's global CDN
+      const blob = await put(mediaFile.name, mediaFile, {
+        access: "public",
+      });
+      mediaUrl = blob.url; // Save the secure URL Vercel gives us back
+    }
 
     await prisma.project.create({
       data: {
@@ -26,17 +36,17 @@ export async function createProject(formData: FormData, content: string) {
         credentialId: formData.get("credentialId") as string || null,
         compensation: formData.get("compensation") as string || null,
         achievement: formData.get("achievement") as string || null,
-        media: formData.get("media") as string || null,
-        content: content, // The raw markdown text
+        media: mediaUrl, // Save the Vercel Blob URL to Neon!
+        content: content,
       },
     });
 
-    // Clear the cache so your live website updates instantly
     revalidatePath("/");
+    revalidatePath("/admin/dashboard");
     return { success: true };
-  } catch (error) {
+  } catch (error: any) {
     console.error("Failed to create project:", error);
-    return { success: false, error: "Failed to save project." };
+    return { success: false, error: error.message || "Failed to save project." };
   }
 }
 
@@ -45,11 +55,8 @@ export async function deleteProject(id: string) {
     await prisma.project.delete({
       where: { id },
     });
-    
-    // Clear caches so the dashboard and home page update instantly
     revalidatePath("/");
     revalidatePath("/admin/dashboard");
-    
     return { success: true };
   } catch (error) {
     console.error("Failed to delete project:", error);

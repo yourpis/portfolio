@@ -71,6 +71,20 @@ export default async function ProjectDetailPage({
           </div>
         </header>
 
+        {/* Project Cover Image (Only renders if an image was uploaded) */}
+        {project.media && (
+          <div className="w-full aspect-video mb-16 rounded-3xl overflow-hidden border border-white/10 relative group">
+            {/* The Image */}
+            <img 
+              src={project.media} 
+              alt={`${project.title} cover`}
+              className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+            />
+            {/* Subtle dark gradient overlay to blend it into the Antigravity background */}
+            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent" />
+          </div>
+        )}
+
         {/* Divider */}
         <div className="w-full h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent mb-16" />
 

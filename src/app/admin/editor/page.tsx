@@ -27,7 +27,7 @@ export default function AdminEditor() {
       form.reset();
       setContent("# Context\n");
     } else {
-      alert("❌ Deployment Failed.");
+      alert(`❌ Deployment Failed: ${result.error}`);
     }
     
     setIsSubmitting(false);
@@ -72,6 +72,7 @@ export default function AdminEditor() {
                 <option value="Full-stack Development" className="bg-neutral-900">Full-stack Development</option>
                 <option value="Frontend Development" className="bg-neutral-900">Frontend Development</option>
                 <option value="Embedded Systems" className="bg-neutral-900">Embedded Systems</option>
+                <option value="Hardware Engineering" className="bg-neutral-900">Hardware Engineering</option>
                 <option value="Management Consulting" className="bg-neutral-900">Management Consulting</option>
                 <option value="Cybersecurity" className="bg-neutral-900">Cybersecurity</option>
                 {/* Feel free to add the rest from your list! */}
@@ -110,8 +111,13 @@ export default function AdminEditor() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm text-neutral-400 font-medium">Media/Cover URL</label>
-              <input name="media" type="text" placeholder="https://..." className={inputClass} />
+              <label className="text-sm text-neutral-400 font-medium">Cover Image Upload</label>
+              <input 
+                name="mediaFile" 
+                type="file" 
+                accept="image/*"
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-xl px-4 py-2 text-neutral-400 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 transition-all cursor-pointer" 
+              />
             </div>
 
           </div>

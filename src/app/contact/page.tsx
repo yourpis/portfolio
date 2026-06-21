@@ -24,28 +24,55 @@ export default function ContactPage() {
           <section className="p-8 rounded-3xl bg-white/5 border border-white/10 backdrop-blur-md">
             <h2 className="text-2xl font-semibold text-white mb-6">Direct Payload</h2>
             
-            {/* Replace the action URL with your Formspree URL later */}
-            <form action="https://formspree.io/f/xqevzplv" method="POST" className="space-y-6">
-              <div className="space-y-2">
-                <label className="text-sm text-neutral-400 font-medium">Designation (Name)</label>
-                <input required name="name" type="text" placeholder="John Doe" className={inputClass} />
+            {/* The Recruiter Fast-Track Form */}
+            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-5">
+              
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Company</label>
+                  <input required name="company" type="text" placeholder="e.g. GoTo, Shopee..." className={inputClass} />
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Recruiter Email</label>
+                  <input required name="email" type="email" placeholder="talent@company.com" className={inputClass} />
+                </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm text-neutral-400 font-medium">Return Address (Email)</label>
-                <input required name="email" type="email" placeholder="john@company.com" className={inputClass} />
+                <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Target Role</label>
+                <select required name="role" className={inputClass + " appearance-none"}>
+                  <option value="Full-Stack Engineer" className="bg-neutral-900">Full-Stack Engineer</option>
+                  <option value="Backend Engineer" className="bg-neutral-900">Backend Engineer</option>
+                  <option value="Frontend Engineer" className="bg-neutral-900">Frontend / Next.js Engineer</option>
+                  <option value="Embedded Systems" className="bg-neutral-900">Embedded Systems / Hardware</option>
+                </select>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Work Model</label>
+                  <select required name="work_model" className={inputClass + " appearance-none"}>
+                    <option value="Remote" className="bg-neutral-900">100% Remote</option>
+                    <option value="Hybrid (Jakarta)" className="bg-neutral-900">Hybrid (Jakarta Area)</option>
+                    <option value="On-Site" className="bg-neutral-900">On-Site</option>
+                  </select>
+                </div>
+                <div className="space-y-2">
+                  <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Job Description Link</label>
+                  <input name="jd_link" type="url" placeholder="https://..." className={inputClass} />
+                </div>
               </div>
 
               <div className="space-y-2">
-                <label className="text-sm text-neutral-400 font-medium">Message constraints...</label>
-                <textarea required name="message" rows={5} placeholder="We want to hire you for..." className={inputClass}></textarea>
+                <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Additional Context (Optional)</label>
+                <textarea name="message" rows={3} placeholder="Salary bands, specific requirements, or why I'd be a good fit..." className={inputClass}></textarea>
               </div>
 
               <button 
                 type="submit" 
-                className="w-full bg-white text-black font-semibold rounded-xl px-4 py-4 hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2"
+                className="w-full bg-white text-black font-semibold rounded-xl px-4 py-4 hover:bg-neutral-200 transition-colors flex items-center justify-center gap-2 mt-4"
               >
-                Transmit Message <span className="text-lg">↗</span>
+                Transmit Proposal <span className="text-lg">↗</span>
               </button>
             </form>
           </section>
