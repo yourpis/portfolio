@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tubagus Dafa | Full-Stack & Embedded Engineer",
-  description: "Tubagus Dafa is a Full-Stack Software & Hardware Engineer based in Jakarta, crafting robust systems, intuitive interfaces, and scalable digital experiences.",
+  description: "Tubagus Dafa is a Full-Stack Software & Hardware Engineer based in Jakarta, crafting systems, interfaces, and digital experiences.",
   openGraph: {
     siteName: "Tubagus Dafa",
     type: "website",
