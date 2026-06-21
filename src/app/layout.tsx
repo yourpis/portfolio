@@ -35,10 +35,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#050505]`}>
         <Navbar />
-        {/* We add mt-16 (margin-top) so the content doesn't hide behind the fixed navbar */}
-        <div className="pt-16">
-          {children}
-        </div>
+        {children}
       </body>
     </html>
   );
