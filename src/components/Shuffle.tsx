@@ -19,7 +19,7 @@ interface ShuffleProps {
   ease?: string;
   threshold?: number;
   rootMargin?: string;
-  tag?: keyof JSX.IntrinsicElements;
+  tag?: keyof React.JSX.IntrinsicElements;
   textAlign?: React.CSSProperties['textAlign'];
   onShuffleComplete?: () => void;
   shuffleTimes?: number;
