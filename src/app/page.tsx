@@ -16,18 +16,37 @@ export default async function Home() {
 
       <div className="relative z-10 flex flex-col items-center">
         
-        {/* Hero Section */}
-        <section className="mt-32 mb-24 text-center max-w-4xl px-6">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-neutral-300 font-medium tracking-wide mb-8">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            System Online
+        {/* The macOS Window Hero Section */}
+        <section className="mt-24 mb-24 w-full max-w-4xl px-6">
+          <div className="rounded-2xl border border-white/10 bg-[#0a0a0a]/80 backdrop-blur-2xl shadow-2xl overflow-hidden">
+            
+            {/* macOS Window Header */}
+            <div className="h-12 border-b border-white/10 bg-white/5 flex items-center px-4 gap-2">
+              <div className="w-3 h-3 rounded-full bg-[#FF5F56] border border-[#E0443E]"></div>
+              <div className="w-3 h-3 rounded-full bg-[#FFBD2E] border border-[#DEA123]"></div>
+              <div className="w-3 h-3 rounded-full bg-[#27C93F] border border-[#1AAB29]"></div>
+            </div>
+
+            {/* Window Content */}
+            <div className="p-10 md:p-16 text-center md:text-left flex flex-col justify-center min-h-[300px]">
+              <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-white mb-6 leading-tight">
+                I craft systems, <br />
+                interfaces & <span className="font-serif italic font-normal text-neutral-400">experiences.</span>
+              </h1>
+              
+              <div className="mt-auto pt-8 border-t border-white/10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <p className="text-sm md:text-base text-neutral-400 font-medium">
+                  Tubagus Dafa. Engineer driven by scalable architecture. <br className="hidden md:block" />
+                  Based in Jakarta, Indonesia.
+                </p>
+                <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md bg-white/5 border border-white/10 text-xs text-neutral-300 font-mono">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                  Ready to deploy
+                </div>
+              </div>
+            </div>
+
           </div>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-neutral-500 mb-6 pb-2">
-            The Developer.<br />Reimagined.
-          </h1>
-          <p className="text-lg md:text-xl text-neutral-400 font-light tracking-wide max-w-2xl mx-auto">
-            Bridging the gap between Low-Level Hardware Architecture and High-Performance Next.js Ecosystems.
-          </p>
         </section>
 
         {/* Dynamic Bento Box Grid */}
