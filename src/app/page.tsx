@@ -18,7 +18,7 @@ export default async function Home() {
     <main className="font-sans selection:bg-black/10">
       
       {/* Light Mode Hero Section */}
-      <section className="relative w-full bg-[#f4f4f0] text-[#111] min-h-[100vh] overflow-hidden flex flex-col justify-center pt-24 pb-16">
+      <section className="relative w-full bg-[#f4f4f0] text-[#111] min-h-[60vh] lg:min-h-[100vh] overflow-hidden flex flex-col justify-center pt-24 pb-16 lg:pb-16">
         
         {/* LineWaves Background */}
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply">
@@ -43,11 +43,11 @@ export default async function Home() {
         <div className="relative z-10 w-full max-w-[90rem] mx-auto px-6 lg:px-12 flex flex-col lg:flex-row items-center lg:items-stretch h-full gap-16 lg:gap-12 flex-1">
           
           {/* Left: Typography & CTA */}
-          <div className="w-full lg:w-[45%] flex flex-col justify-center pt-10 lg:pt-0 relative min-w-0">
+          <div className="w-full lg:w-[45%] flex flex-col justify-center pt-10 lg:pt-0 relative z-20 min-w-0">
             
 
             
-            <h1 className="text-[5rem] sm:text-[6rem] lg:text-[7rem] xl:text-[8rem] tracking-tighter leading-[0.8] mb-6 text-left flex flex-col">
+            <h1 className="text-[2.5rem] leading-[0.85] sm:text-[6rem] lg:text-[7rem] xl:text-[8rem] tracking-tighter mb-4 lg:mb-6 text-left flex flex-col max-w-[55%] lg:max-w-none">
               <span className="font-sans font-black text-black tracking-[-0.05em]">Code.</span>
               <span className="font-sans font-black text-black tracking-[-0.05em] whitespace-nowrap">
                 <MorphingWord word1="Hard" word2="Soft" />ware.
@@ -55,12 +55,12 @@ export default async function Home() {
               <span className="font-serif italic font-normal text-neutral-600 mt-2">Stories.</span>
             </h1>
             
-            <p className="mt-6 mb-10 text-neutral-600 font-sans text-sm md:text-base max-w-md leading-normal text-left">
+            <p className="mt-4 mb-8 lg:mt-6 lg:mb-10 text-neutral-600 font-sans text-[11px] sm:text-sm md:text-base max-w-[55%] lg:max-w-md leading-normal text-left z-20 relative">
               I am Tubagus Dafa, a software engineer and director. I build full-stack web platforms, embedded hardware, and stories.
             </p>
             
             <div className="flex items-center gap-6 relative z-20 mix-blend-difference">
-              <Link href="#projects" className="inline-flex items-center justify-center bg-white text-black px-6 md:px-10 h-[2.5rem] md:h-[3.5rem] font-sans font-black uppercase tracking-widest text-[0.7rem] md:text-[0.9rem] leading-none">
+              <Link href="#projects" className="inline-flex items-center justify-center bg-white text-black px-4 md:px-10 h-[2.2rem] md:h-[3.5rem] font-sans font-black uppercase tracking-widest text-[0.6rem] md:text-[0.9rem] leading-none">
                 <Shuffle
                   text="VIEW PROJECTS"
                   shuffleDirection="up"
@@ -75,24 +75,23 @@ export default async function Home() {
               </Link>
             </div>
             
-            {/* Overlapping Element 2 (Keyboard/Laptop) at bottom left */}
-            <div className="hidden lg:block absolute -bottom-16 left-0 xl:left-8 w-56 h-56 xl:w-72 xl:h-72 z-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] overflow-hidden transform -rotate-6">
+            {/* Overlapping Element 2 (Keyboard/Laptop) at bottom right on mobile, bottom left on desktop */}
+            <div className="absolute -bottom-8 right-20 lg:-bottom-16 lg:left-0 lg:right-auto w-16 h-16 md:w-32 md:h-32 xl:w-72 xl:h-72 z-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] overflow-hidden transform -rotate-6">
                <Image src="/hero_element_2.jpeg" alt="Workspace Setup" fill className="object-cover" />
             </div>
           </div>
 
           {/* Right: Main Image & Overlapping elements */}
-          <div className="w-full lg:w-[55%] relative min-h-[600px] lg:min-h-0 flex items-center">
+          <div className="absolute top-10 right-0 w-[45%] h-[260px] lg:relative lg:top-auto lg:right-auto lg:w-[55%] lg:h-auto lg:min-h-0 flex items-center z-10">
             
             {/* Main Developer Image */}
-            <div className="absolute inset-x-0 inset-y-12 lg:inset-y-8 lg:inset-x-0 z-10 overflow-hidden shadow-2xl bg-neutral-200">
-               <Image src="/hero_main.jpeg" alt="Leonardo the Cat" fill className="object-cover object-center" priority />
+            <div className="absolute inset-0 lg:inset-x-0 lg:inset-y-8 z-10 overflow-hidden shadow-xl bg-neutral-200">
+               <Image src="/hero_main.jpeg" alt="Leonardo the Cat" fill className="object-cover object-[40%_center] lg:object-center" priority />
                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
             </div>
 
-
-            {/* Overlapping Element 1 (Code/Diagram) at top right */}
-            <div className="absolute -top-4 -right-4 lg:-right-8 lg:-top-4 w-48 h-48 md:w-64 md:h-64 z-20 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.4)] overflow-hidden transform rotate-3">
+            {/* Overlapping Element 1 (Code/Diagram) at bottom right on mobile, top right on desktop */}
+            <div className="absolute -bottom-6 right-2 lg:bottom-auto lg:-top-4 lg:-right-8 w-20 h-20 md:w-64 md:h-64 z-20 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.4)] overflow-hidden transform rotate-3">
                <Image src="/hero_element_1.jpeg" alt="Architecture Diagram" fill className="object-cover" />
             </div>
             

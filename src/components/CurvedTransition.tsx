@@ -37,7 +37,7 @@ export default function CurvedTransition() {
   return (
     <div 
       ref={containerRef} 
-      className="w-full relative h-[100px] md:h-[150px] lg:h-[200px] -mt-[100px] md:-mt-[150px] lg:-mt-[200px] z-0 pointer-events-none"
+      className="w-full relative h-[60px] md:h-[150px] lg:h-[200px] -mt-[60px] md:-mt-[150px] lg:-mt-[200px] z-0 pointer-events-none"
     >
       <svg
         className="w-full h-full"
