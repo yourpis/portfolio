@@ -78,14 +78,13 @@ export default async function ProjectDetailPage({
         <article className="prose prose-invert prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-li:text-neutral-300">
           <ReactMarkdown
             components={{
-              // Customizing how the markdown elements look using Tailwind!
-              h1: ({node, ...props}) => <h1 className="text-3xl text-white mt-12 mb-6" {...props} />,
-              h2: ({node, ...props}) => <h2 className="text-2xl text-white mt-10 mb-4" {...props} />,
-              h3: ({node, ...props}) => <h3 className="text-xl text-white mt-8 mb-4" {...props} />,
-              p: ({node, ...props}) => <p className="text-neutral-300 leading-relaxed mb-6" {...props} />,
-              ul: ({node, ...props}) => <ul className="list-disc list-outside ml-5 mb-6 space-y-2" {...props} />,
-              li: ({node, ...props}) => <li className="text-neutral-300 pl-2" {...props} />,
-              code: ({node, className, children, ...props}) => {
+              h1: ({_node, ...props}: any) => <h1 className="text-3xl text-white mt-12 mb-6" {...props} />,
+              h2: ({_node, ...props}: any) => <h2 className="text-2xl text-white mt-10 mb-4" {...props} />,
+              h3: ({_node, ...props}: any) => <h3 className="text-xl text-white mt-8 mb-4" {...props} />,
+              p: ({_node, ...props}: any) => <p className="text-neutral-300 leading-relaxed mb-6" {...props} />,
+              ul: ({_node, ...props}: any) => <ul className="list-disc list-outside ml-5 mb-6 space-y-2" {...props} />,
+              li: ({_node, ...props}: any) => <li className="text-neutral-300 pl-2" {...props} />,
+              code: ({_node, className, children, ...props}: any) => {
                 const match = /language-(\w+)/.exec(className || '')
                 return (
                   <code className="bg-neutral-900 border border-neutral-800 rounded-md px-1.5 py-0.5 text-sm font-mono text-emerald-400" {...props}>
