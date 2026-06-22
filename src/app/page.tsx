@@ -108,7 +108,7 @@ export default async function Home() {
       <CurvedTransition />
 
       {/* Dark Mode Content (Projects) */}
-      <section id="projects" className="relative w-full bg-[#050505] text-[#ededed] min-h-screen pt-32 pb-32 flex flex-col items-center">
+      <section id="projects" className="relative w-full bg-[#050505] text-[#ededed] min-h-screen pt-32 pb-32 flex flex-col items-center -mt-[1px] lg:-mt-[2px]">
         {/* Subtle glowing background mesh */}
         <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/40 via-[#050505] to-[#050505] pointer-events-none" />
 
