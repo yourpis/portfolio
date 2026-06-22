@@ -6,6 +6,7 @@ import Shuffle from "@/components/Shuffle";
 import DraggableNotice from "@/components/DraggableNotice";
 import CurvedTransition from "@/components/CurvedTransition";
 import MorphingWord from "@/components/MorphingWord";
+import SmoothScrollLink from "@/components/SmoothScrollLink";
 
 // This is a Server Component - it fetches data securely on the server!
 export default async function Home() {
@@ -18,7 +19,7 @@ export default async function Home() {
     <main className="font-sans selection:bg-black/10">
       
       {/* Light Mode Hero Section */}
-      <section className="relative w-full bg-[#f4f4f0] text-[#111] min-h-[60vh] lg:min-h-[100vh] overflow-hidden flex flex-col justify-center pt-24 pb-16 lg:pb-16">
+      <section className="relative w-full bg-[#f4f4f0] text-[#111] min-h-[60vh] lg:min-h-[100vh] overflow-hidden flex flex-col justify-center pt-24 pb-32 lg:pb-48">
         
         {/* LineWaves Background */}
         <div className="absolute inset-0 z-0 opacity-40 mix-blend-multiply">
@@ -60,7 +61,7 @@ export default async function Home() {
             </p>
             
             <div className="flex items-center gap-6 relative z-20 mix-blend-difference">
-              <Link href="#projects" className="inline-flex items-center justify-center bg-white text-black px-4 md:px-10 h-[2.2rem] md:h-[3.5rem] font-sans font-black uppercase tracking-widest text-[0.6rem] md:text-[0.9rem] leading-none">
+              <SmoothScrollLink targetId="projects" href="#projects" className="inline-flex items-center justify-center bg-white text-black px-4 md:px-10 h-[2.2rem] md:h-[3.5rem] font-sans font-black uppercase tracking-widest text-[0.6rem] md:text-[0.9rem] leading-none">
                 <Shuffle
                   text="VIEW PROJECTS"
                   shuffleDirection="up"
@@ -72,11 +73,11 @@ export default async function Home() {
                   triggerOnHover={true}
                   tag="span"
                 />
-              </Link>
+              </SmoothScrollLink>
             </div>
             
             {/* Overlapping Element 2 (Keyboard/Laptop) at bottom right on mobile, bottom left on desktop */}
-            <div className="absolute -bottom-8 right-20 lg:-bottom-16 lg:left-0 lg:right-auto w-16 h-16 md:w-32 md:h-32 xl:w-72 xl:h-72 z-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] overflow-hidden transform -rotate-6">
+            <div className="absolute -bottom-8 right-20 lg:-bottom-32 lg:left-0 lg:right-auto w-16 h-16 md:w-32 md:h-32 xl:w-72 xl:h-72 z-10 shadow-[0_20px_50px_-12px_rgba(0,0,0,0.3)] overflow-hidden transform -rotate-6">
                <Image src="/hero_element_2.jpeg" alt="Workspace Setup" fill className="object-cover" />
             </div>
           </div>
