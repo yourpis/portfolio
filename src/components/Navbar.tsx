@@ -11,20 +11,21 @@ export default function Navbar() {
           href="/" 
           className="flex flex-col w-fit"
         >
-          <span className="font-serif text-[1.55rem] md:text-[2.1rem] tracking-tighter text-white uppercase leading-[0.85]">
+          <span className="font-serif text-[0.95rem] md:text-[2.1rem] tracking-tighter text-white uppercase leading-[0.85]">
             Tubagus
           </span>
-          <span className="font-sans font-black text-[2.7rem] md:text-[3.65rem] tracking-tighter text-white uppercase leading-[0.85]">
+          <span className="font-sans font-black text-[1.65rem] md:text-[3.65rem] tracking-tighter text-white uppercase leading-[0.85]">
             Dafa
           </span>
         </Link>
 
         {/* Navigation Links */}
-        <nav className="flex items-start mt-[0.1rem] md:mt-[0.15rem]">
+        <nav className="flex items-start mt-[0.075rem] md:mt-[0.15rem]">
           <Link 
             href="/contact" 
-            className="bg-white text-black px-5 md:px-8 h-[1.08rem] md:h-[1.48rem] flex items-center justify-center font-sans font-black uppercase tracking-widest text-[0.6rem] md:text-[0.7rem] leading-none"
+            className="bg-white text-black w-[4.5rem] md:w-[9.5rem] h-[0.65rem] md:h-[1.48rem] flex items-center justify-center font-sans font-black uppercase tracking-widest text-[0.35rem] md:text-[0.7rem] leading-none"
           >
+            <span className="translate-x-[0.05em] translate-y-[0.08em] block">
             <Shuffle
               text="CONNECT"
               shuffleDirection="up"
@@ -36,6 +37,7 @@ export default function Navbar() {
               triggerOnHover={true}
               tag="span"
             />
+            </span>
           </Link>
         </nav>
 
