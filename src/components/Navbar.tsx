@@ -18,7 +18,7 @@ export default function Navbar() {
   };
   return (
     <header className="fixed top-0 w-full z-50 pt-8 lg:pt-12 mix-blend-difference pointer-events-none">
-      <div className="max-w-[90rem] mx-auto px-6 lg:px-12 flex items-end justify-between">
+      <div className="max-w-[100rem] mx-auto px-6 lg:px-12 flex items-end justify-between">
         
         {/* Logo / Name */}
         <Link 
