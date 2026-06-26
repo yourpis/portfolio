@@ -142,6 +142,11 @@ export default function AdminEditor() {
             </div>
 
             <div className="space-y-2">
+              <label className="text-sm text-neutral-400 font-medium">Website URL (Optional)</label>
+              <input name="url" type="url" placeholder="https://..." className={inputClass} />
+            </div>
+
+            <div className="space-y-2">
               <label className="text-sm text-neutral-400 font-medium">Cover Image/Video Upload</label>
               <input 
                 name="mediaFile" 

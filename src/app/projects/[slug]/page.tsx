@@ -2,6 +2,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import ReactMarkdown from "react-markdown";
 import prisma from "@/lib/prisma";
+import BackButton from "@/components/BackButton";
 
 // Next.js 16 handles params as a Promise for dynamic routes
 export default async function ProjectDetailPage({
@@ -27,99 +28,145 @@ export default async function ProjectDetailPage({
     where: { slug: resolvedParams.slug },
     data: { views: { increment: 1 } },
   });
-
   return (
-    <main className="min-h-screen bg-[#050505] text-[#ededed] font-sans selection:bg-white/20 pb-32">
-      {/* Background Glow */}
-      <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/30 via-[#050505] to-[#050505] pointer-events-none" />
+    <main className="min-h-screen font-sans selection:bg-white/20 bg-[#141414]">
+      {/* Top Section: RGB 0 */}
+      <div className="bg-black pt-24 md:pt-40 px-5 sm:px-6 md:px-8">
+        <div className="max-w-4xl mx-auto">
+          {/* Back Button */}
+          <BackButton />
 
-      <div className="relative z-10 max-w-3xl mx-auto px-6 pt-24">
-        
-        {/* Back Button */}
-        <Link 
-          href="/" 
-          className="inline-flex items-center text-sm font-medium text-neutral-500 hover:text-white transition-colors mb-12"
-        >
-          ← Return to System Core
-        </Link>
+          {/* Project Cover Image */}
+          {project.media && (
+            <div className="w-full aspect-video overflow-hidden mb-8 md:mb-10 relative group">
+              {project.media.match(/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i) ? (
+                <video
+                  src={project.media}
+                  autoPlay loop muted playsInline
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <img
+                  src={project.media}
+                  alt={`${project.title} cover`}
+                  className="w-full h-full object-cover"
+                />
+              )}
 
-        {/* Project Header */}
-        <header className="mb-16">
-          <div className="flex flex-wrap gap-3 mb-6">
-            <span className="px-3 py-1 text-xs font-mono tracking-widest text-neutral-300 bg-white/5 border border-white/10 rounded-full">
-              {project.type.toUpperCase()}
-            </span>
-            <span className="px-3 py-1 text-xs font-mono tracking-widest text-neutral-400 border border-neutral-800 rounded-full">
-              {project.subcategory.toUpperCase()}
-            </span>
+              {/* Optional Website Link Overlay */}
+              {project.url && (
+                <Link
+                  href={project.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute bottom-4 left-4 md:bottom-8 md:left-8 inline-flex items-center gap-2.5 md:gap-4 px-3 py-2 md:px-5 md:py-3 bg-white text-black mix-blend-difference z-20 hover:scale-[1.02] transition-transform duration-300"
+                >
+                  <div className="flex flex-col justify-center gap-0.5 md:gap-1">
+                    <span className="text-[9px] md:text-[11px] font-bold tracking-widest text-neutral-500 uppercase leading-none">Visit Site</span>
+                    <span className="text-base sm:text-lg md:text-xl font-black truncate max-w-[130px] sm:max-w-[200px] md:max-w-md lg:max-w-lg leading-none mt-[1px] md:mt-0">
+                      {project.url.replace(/^https?:\/\/(www\.)?/, '')}
+                    </span>
+                  </div>
+                  <svg
+                    className="w-4 h-4 md:w-6 md:h-6 ml-0.5 md:ml-1"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <line x1="7" y1="17" x2="17" y2="7"></line>
+                    <polyline points="7 7 17 7 17 17"></polyline>
+                  </svg>
+                </Link>
+              )}
+            </div>
+          )}
+
+          {/* Context and Domain Data */}
+          <div className="flex items-center gap-3 md:gap-4 pb-5 px-1">
+            <span className="text-white text-sm md:text-[15px] font-medium">{project.type}</span>
+            <div className="w-[1.5px] h-3.5 md:h-4 bg-[#dbfe52]" />
+            <span className="text-white text-sm md:text-[15px] font-medium">{project.subcategory}</span>
           </div>
+        </div>
+      </div>
 
-          <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
-            {project.title}
-          </h1>
+      {/* Bottom Section: RGB 20 */}
+      <div className="bg-[#141414] px-5 sm:px-6 md:px-8 py-10 md:py-12 pb-24 md:pb-32">
+        <div className="max-w-4xl mx-auto">
+          <header className="mb-10 md:mb-12">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white mb-4 md:mb-6">
+              {project.title}
+            </h1>
 
-          <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-8 text-sm text-neutral-400">
-            {project.role && (
-              <p>Role: <span className="text-neutral-200">{project.role}</span></p>
-            )}
-            {project.dateStart && project.dateEnd && (
-              <p>Timeline: <span className="text-neutral-200">{project.dateStart} — {project.dateEnd}</span></p>
-            )}
-            {project.organization && (
-              <p>Org: <span className="text-neutral-200">{project.organization}</span></p>
-            )}
-          </div>
-        </header>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 mt-8 md:mt-10 pb-8 md:pb-10 border-b border-neutral-800/50 mb-8 md:mb-10">
+              {project.role && (
+                <div className="flex flex-col gap-1 md:gap-1.5">
+                  <span className="text-[10px] tracking-widest text-neutral-500 uppercase font-bold">Role</span>
+                  <span className="text-sm sm:text-base md:text-lg text-white font-medium">{project.role}</span>
+                </div>
+              )}
+              {project.dateStart && project.dateEnd && (
+                <div className="flex flex-col gap-1 md:gap-1.5">
+                  <span className="text-[10px] tracking-widest text-neutral-500 uppercase font-bold">Timeline</span>
+                  <span className="text-sm sm:text-base md:text-lg text-white font-medium">{project.dateStart} — {project.dateEnd}</span>
+                </div>
+              )}
+              {project.organization && (
+                <div className="flex flex-col gap-1 md:gap-1.5">
+                  <span className="text-[10px] tracking-widest text-neutral-500 uppercase font-bold">Organization</span>
+                  <span className="text-sm sm:text-base md:text-lg text-white font-medium">{project.organization}</span>
+                </div>
+              )}
+            </div>
+          </header>
 
-        {/* Project Cover Image (Only renders if an image was uploaded) */}
-        {project.media && (
-          <div className="w-full aspect-video mb-16 rounded-3xl overflow-hidden border border-white/10 relative group">
-            {/* The Media (Image or Video) */}
-            {project.media.match(/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i) ? (
-              <video 
-                src={project.media} 
-                autoPlay loop muted playsInline
-                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-              />
-            ) : (
-              <img 
-                src={project.media} 
-                alt={`${project.title} cover`}
-                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-              />
-            )}
-            {/* Subtle dark gradient overlay to blend it into the Antigravity background */}
-            <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent" />
-          </div>
-        )}
-
-        {/* Divider */}
-        <div className="w-full h-[1px] bg-gradient-to-r from-white/20 via-white/5 to-transparent mb-16" />
-
-        {/* Markdown Content rendered beautifully */}
-        <article className="prose prose-invert prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-blue-400 prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-li:text-neutral-300">
-          <ReactMarkdown
-            components={{
-              h1: ({_node, ...props}: any) => <h1 className="text-3xl text-white mt-12 mb-6" {...props} />,
-              h2: ({_node, ...props}: any) => <h2 className="text-2xl text-white mt-10 mb-4" {...props} />,
-              h3: ({_node, ...props}: any) => <h3 className="text-xl text-white mt-8 mb-4" {...props} />,
-              p: ({_node, ...props}: any) => <p className="text-neutral-300 leading-relaxed mb-6" {...props} />,
-              ul: ({_node, ...props}: any) => <ul className="list-disc list-outside ml-5 mb-6 space-y-2" {...props} />,
-              li: ({_node, ...props}: any) => <li className="text-neutral-300 pl-2" {...props} />,
-              code: ({_node, className, children, ...props}: any) => {
-                const match = /language-(\w+)/.exec(className || '')
-                return (
-                  <code className="bg-neutral-900 border border-neutral-800 rounded-md px-1.5 py-0.5 text-sm font-mono text-emerald-400" {...props}>
-                    {children}
-                  </code>
+          {/* Markdown Content */}
+          <article className="prose prose-invert prose-neutral max-w-none prose-headings:font-semibold prose-headings:tracking-tight prose-a:text-[#dbfe52] prose-a:no-underline hover:prose-a:underline prose-strong:text-white prose-li:text-neutral-300">
+            <ReactMarkdown
+              components={{
+                h1: ({ _node, ...props }: any) => <h1 className="text-xl md:text-2xl text-white mt-8 md:mt-10 mb-3 md:mb-4" {...props} />,
+                h2: ({ _node, ...props }: any) => <h2 className="text-lg md:text-xl text-white mt-6 md:mt-8 mb-3 md:mb-4" {...props} />,
+                h3: ({ _node, ...props }: any) => <h3 className="text-base md:text-lg text-white mt-5 md:mt-6 mb-2 md:mb-3" {...props} />,
+                p: ({ _node, ...props }: any) => <p className="text-neutral-300 text-sm md:text-base leading-relaxed mb-5 md:mb-6" {...props} />,
+                ul: ({ _node, ...props }: any) => <ul className="list-disc list-outside ml-4 md:ml-5 mb-5 md:mb-6 space-y-1.5 md:space-y-2 text-sm md:text-base" {...props} />,
+                li: ({ _node, ...props }: any) => <li className="text-neutral-300 pl-1.5 md:pl-2" {...props} />,
+                code: ({ _node, className, children, ...props }: any) => {
+                  const match = /language-(\w+)/.exec(className || '')
+                  return (
+                    <code className="bg-neutral-900 border border-neutral-800 rounded-md px-1.5 py-0.5 text-xs md:text-sm font-mono text-emerald-400" {...props}>
+                      {children}
+                    </code>
+                  )
+                },
+                img: ({ _node, src, alt, ...props }: any) => {
+                  if (!src) return null;
+                  return (
+                    // eslint-disable-next-line @next/next/no-img-element
+                    <img 
+                      src={src} 
+                      alt={alt || "Project Image"}
+                      className="rounded-lg shadow-lg my-6 md:my-8 w-full bg-neutral-900/20" 
+                      onError={(e) => {
+                        e.currentTarget.onerror = null; 
+                        e.currentTarget.src = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 24 24' fill='none' stroke='%23525252' stroke-width='1' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='3' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Ccircle cx='8.5' cy='8.5' r='1.5'%3E%3C/circle%3E%3Cpolyline points='21 15 16 10 5 21'%3E%3C/polyline%3E%3Cline x1='3' y1='3' x2='21' y2='21' stroke='%23ef4444' stroke-width='1.5'%3E%3C/line%3E%3C/svg%3E";
+                        e.currentTarget.className = "rounded-lg shadow-lg my-6 md:my-8 w-full h-48 md:h-64 bg-neutral-900/30 object-contain p-10 md:p-16 border border-neutral-800/50";
+                      }}
+                      {...props} 
+                    />
+                  );
+                },
+                a: ({ _node, ...props }: any) => (
+                  <a className="text-[#dbfe52] no-underline hover:underline transition-colors" target="_blank" rel="noopener noreferrer" {...props} />
                 )
-              }
-            }}
-          >
-            {project.content}
-          </ReactMarkdown>
-        </article>
-
+              }}
+            >
+              {project.content}
+            </ReactMarkdown>
+          </article>
+        </div>
       </div>
     </main>
   );
