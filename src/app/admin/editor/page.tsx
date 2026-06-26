@@ -142,11 +142,11 @@ export default function AdminEditor() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm text-neutral-400 font-medium">Cover Image Upload</label>
+              <label className="text-sm text-neutral-400 font-medium">Cover Image/Video Upload</label>
               <input 
                 name="mediaFile" 
                 type="file" 
-                accept="image/*"
+                accept="image/*,video/*"
                 className="w-full bg-[#0a0a0a] border border-white/10 rounded-[9px] px-4 py-2 text-neutral-400 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 transition-all cursor-pointer" 
               />
             </div>

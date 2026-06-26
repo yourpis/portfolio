@@ -74,12 +74,20 @@ export default async function ProjectDetailPage({
         {/* Project Cover Image (Only renders if an image was uploaded) */}
         {project.media && (
           <div className="w-full aspect-video mb-16 rounded-3xl overflow-hidden border border-white/10 relative group">
-            {/* The Image */}
-            <img 
-              src={project.media} 
-              alt={`${project.title} cover`}
-              className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-            />
+            {/* The Media (Image or Video) */}
+            {project.media.match(/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i) ? (
+              <video 
+                src={project.media} 
+                autoPlay loop muted playsInline
+                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+              />
+            ) : (
+              <img 
+                src={project.media} 
+                alt={`${project.title} cover`}
+                className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
+              />
+            )}
             {/* Subtle dark gradient overlay to blend it into the Antigravity background */}
             <div className="absolute inset-0 bg-gradient-to-t from-[#050505] via-[#050505]/20 to-transparent" />
           </div>

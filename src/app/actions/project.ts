@@ -3,9 +3,16 @@
 import prisma from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { put } from "@vercel/blob"; // Import the Vercel Blob upload function
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
 export async function createProject(formData: FormData, content: string) {
   try {
+    const session = await getServerSession(authOptions as any);
+    if (!session) {
+      throw new Error("Unauthorized action.");
+    }
+
     const title = formData.get("title") as string;
     const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
 
@@ -52,6 +59,11 @@ export async function createProject(formData: FormData, content: string) {
 
 export async function deleteProject(id: string) {
   try {
+    const session = await getServerSession(authOptions as any);
+    if (!session) {
+      throw new Error("Unauthorized action.");
+    }
+
     await prisma.project.delete({
       where: { id },
     });
