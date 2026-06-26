@@ -10,9 +10,52 @@ import SmoothScrollLink from "@/components/SmoothScrollLink";
 
 // This is a Server Component - it fetches data securely on the server!
 export default async function Home() {
-  // Fetch all projects from Neon, ordered by newest first
-  const items = await prisma.project.findMany({
+  // Fetch all projects from Neon, ordered by newest first as baseline
+  const fetchedItems = await prisma.project.findMany({
     orderBy: { createdAt: "desc" },
+  });
+
+  const items = fetchedItems.sort((a, b) => {
+    const aEndPresent = a.dateEnd === 'Present';
+    const bEndPresent = b.dateEnd === 'Present';
+
+    // 1. Both Present -> sort by dateStart
+    if (aEndPresent && bEndPresent) {
+      if (a.dateStart && b.dateStart) return b.dateStart.localeCompare(a.dateStart);
+      if (a.dateStart) return -1;
+      if (b.dateStart) return 1;
+      return b.createdAt.getTime() - a.createdAt.getTime();
+    }
+    if (aEndPresent) return -1;
+    if (bEndPresent) return 1;
+
+    const aHasEnd = !!a.dateEnd;
+    const bHasEnd = !!b.dateEnd;
+
+    // 2. Both have valid End Dates (YYYY-MM) -> sort by dateEnd desc, tie-break with dateStart desc
+    if (aHasEnd && bHasEnd) {
+      if (a.dateEnd !== b.dateEnd) return b.dateEnd!.localeCompare(a.dateEnd!);
+      if (a.dateStart && b.dateStart) return b.dateStart.localeCompare(a.dateStart);
+      if (a.dateStart) return -1;
+      if (b.dateStart) return 1;
+      return b.createdAt.getTime() - a.createdAt.getTime();
+    }
+    if (aHasEnd) return -1;
+    if (bHasEnd) return 1;
+
+    // 3. Neither has End Date, check Start Date
+    const aHasStart = !!a.dateStart;
+    const bHasStart = !!b.dateStart;
+
+    if (aHasStart && bHasStart) {
+      if (a.dateStart !== b.dateStart) return b.dateStart!.localeCompare(a.dateStart!);
+      return b.createdAt.getTime() - a.createdAt.getTime();
+    }
+    if (aHasStart) return -1;
+    if (bHasStart) return 1;
+
+    // 4. No dates at all -> sort by createdAt desc
+    return b.createdAt.getTime() - a.createdAt.getTime();
   });
 
   return (

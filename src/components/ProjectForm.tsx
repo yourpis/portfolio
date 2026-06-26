@@ -18,6 +18,7 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
   const isCustomDomain = initialData?.subcategory && !["Web Development", "Embedded Systems & IoT", "Hardware & Digital Design", "Game Development", "Human-Computer Interaction (HCI)", "Software Engineering", "Cybersecurity", "Data Science & AI"].includes(initialData.subcategory);
   
   const [selectedDomain, setSelectedDomain] = useState(isCustomDomain ? "Other" : (initialData?.subcategory || "Web Development"));
+  const [isPresent, setIsPresent] = useState(initialData?.dateEnd === 'Present');
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,6 +40,7 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
         form.reset();
         setContent("# Context\n");
         setSelectedDomain("Web Development");
+        setIsPresent(false);
       } else {
         router.push('/admin/dashboard');
       }
@@ -202,12 +204,25 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
 
             <div className="space-y-2">
               <label className="text-sm text-neutral-400 font-medium">Start Date</label>
-              <input name="dateStart" type="text" defaultValue={initialData?.dateStart || ''} placeholder="YYYY-MM" className={inputClass} />
+              <input name="dateStart" type="month" defaultValue={initialData?.dateStart || ''} className={inputClass} />
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm text-neutral-400 font-medium">End Date</label>
-              <input name="dateEnd" type="text" defaultValue={initialData?.dateEnd || ''} placeholder="YYYY-MM or Present" className={inputClass} />
+              <label className="text-sm text-neutral-400 font-medium flex items-center justify-between">
+                <span>End Date</span>
+                <div className="flex items-center gap-2">
+                  <input type="checkbox" id="isPresent" checked={isPresent} onChange={(e) => setIsPresent(e.target.checked)} className="w-3.5 h-3.5 accent-white bg-white/10" />
+                  <label htmlFor="isPresent" className="text-xs text-neutral-300 font-normal cursor-pointer">Present</label>
+                </div>
+              </label>
+              {isPresent ? (
+                <>
+                  <input type="hidden" name="dateEnd" value="Present" />
+                  <input type="text" disabled value="Present" className={inputClass + " opacity-50 cursor-not-allowed"} />
+                </>
+              ) : (
+                <input name="dateEnd" type="month" defaultValue={initialData?.dateEnd !== 'Present' ? initialData?.dateEnd : ''} className={inputClass} />
+              )}
             </div>
 
             <div className="space-y-2">
