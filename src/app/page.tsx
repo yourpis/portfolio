@@ -123,47 +123,34 @@ export default async function Home() {
         {/* Subtle glowing background mesh */}
         <div className="absolute inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/40 via-[#050505] to-[#050505] pointer-events-none" />
 
-        <div className="relative z-10 flex flex-col items-center w-full">
-           <div className="mb-20 text-center">
-             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6">Latest Deployments</h2>
-             <p className="text-neutral-500 text-lg max-w-xl mx-auto">Explore the systems and architectures I've built, focusing on scalable backend solutions and immersive frontend interfaces.</p>
+        <div className="relative z-10 flex flex-col items-start max-w-7xl w-full px-6 mx-auto">
+           <div className="mb-8">
+             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight text-white">Latest Deployments</h2>
            </div>
           
-          {/* Dynamic Bento Box Grid */}
-          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl w-full px-6">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-10 w-full">
             {items.map((item) => (
-              <Link href={`/projects/${item.slug}`} key={item.id} className="group outline-none">
-                <div className="h-full flex flex-col p-8 rounded-3xl bg-white/5 border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 relative overflow-hidden">
-                  
-                  {/* Hover Glow Effect */}
-                  <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
-
-                  {/* Card Header (Type & Status) */}
-                  <div className="flex justify-between items-center mb-8">
-                    <span className="text-xs font-mono text-neutral-400 uppercase tracking-widest border border-white/10 px-3 py-1.5 rounded-md bg-black/20">
-                      {item.type}
-                    </span>
-                    <span className="text-[10px] uppercase tracking-widest flex items-center gap-1 text-neutral-500">
-                      {item.status}
-                    </span>
+              <Link href={`/projects/${item.slug}`} key={item.id} className="group outline-none flex flex-col gap-4">
+                <div className="relative w-full aspect-video rounded-[9px] overflow-hidden bg-neutral-900 transition-all duration-500">
+                  {item.media ? (
+                    <Image src={item.media} alt={item.title} fill className="object-cover" />
+                  ) : (
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#1a1a1a] to-[#0a0a0a] flex items-center justify-center">
+                       <span className="opacity-[0.03] font-sans font-black text-[8rem] tracking-tighter">{item.title.substring(0, 2).toUpperCase()}</span>
+                    </div>
+                  )}
+                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-2 py-1 rounded-md text-[10px] font-bold text-white tracking-widest uppercase">
+                    {item.status}
                   </div>
+                </div>
 
-                  {/* Card Body */}
-                  <h3 className="text-3xl font-semibold mb-3 group-hover:text-white text-neutral-200 transition-colors">
+                <div className="flex flex-col px-1">
+                  <span className="text-xs font-semibold text-neutral-400 uppercase tracking-widest mb-1.5">
+                    {item.subcategory}
+                  </span>
+                  <h3 className="text-base md:text-lg font-medium text-neutral-100 group-hover:text-white transition-colors leading-tight">
                     {item.title}
                   </h3>
-                  <p className="text-neutral-400 text-sm font-light mb-10 leading-relaxed">
-                    {item.role} • {item.subcategory}
-                  </p>
-
-                  {/* Card Footer */}
-                  <div className="mt-auto flex items-center text-sm font-semibold text-neutral-400 group-hover:text-[#d0ff14] transition-colors uppercase tracking-wider">
-                    Explore Protocol 
-                    <span className="ml-2 transform group-hover:translate-x-2 transition-transform">
-                      →
-                    </span>
-                  </div>
-
                 </div>
               </Link>
             ))}

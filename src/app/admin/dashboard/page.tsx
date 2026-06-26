@@ -25,7 +25,7 @@ export default async function AdminDashboard() {
           
           <Link 
             href="/admin/editor" 
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-xl hover:bg-neutral-200 transition-colors"
+            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-[9px] hover:bg-neutral-200 transition-colors"
           >
             + Initialize New Protocol
           </Link>
@@ -33,17 +33,17 @@ export default async function AdminDashboard() {
 
         {/* Analytics Overview Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <div className="p-6 rounded-[9px] bg-white/5 border border-white/10 backdrop-blur-md">
             <h3 className="text-neutral-400 text-sm font-medium mb-2">Total Deployments</h3>
             <p className="text-3xl font-bold text-white">{projects.length}</p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <div className="p-6 rounded-[9px] bg-white/5 border border-white/10 backdrop-blur-md">
             <h3 className="text-neutral-400 text-sm font-medium mb-2">Total System Views</h3>
             <p className="text-3xl font-bold text-emerald-400">
               {projects.reduce((sum, p) => sum + p.views, 0)}
             </p>
           </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-md">
+          <div className="p-6 rounded-[9px] bg-white/5 border border-white/10 backdrop-blur-md">
             <h3 className="text-neutral-400 text-sm font-medium mb-2">Top Protocol</h3>
             <p className="text-lg font-bold text-white truncate">
               {projects[0]?.title || "N/A"}
@@ -52,7 +52,7 @@ export default async function AdminDashboard() {
         </div>
 
         {/* The Data Table */}
-        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden">
+        <div className="rounded-[9px] border border-white/10 bg-white/5 backdrop-blur-md overflow-hidden">
           <div className="overflow-x-auto">
             <table className="w-full text-left text-sm text-neutral-300">
               <thead className="bg-white/5 text-neutral-400 uppercase font-mono tracking-wider text-[10px]">
