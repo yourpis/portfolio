@@ -59,6 +59,60 @@ export async function createProject(formData: FormData, content: string) {
   }
 }
 
+export async function updateProject(id: string, formData: FormData, content: string) {
+  try {
+    const session = await getServerSession(authOptions as any);
+    if (!session) {
+      throw new Error("Unauthorized action.");
+    }
+
+    const title = formData.get("title") as string;
+    const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)+/g, "");
+
+    // Handle Image Upload to Vercel Blob
+    const mediaFile = formData.get("mediaFile") as File;
+    let mediaUrl = undefined;
+
+    if (mediaFile && mediaFile.size > 0) {
+      const blob = await put(mediaFile.name, mediaFile, {
+        access: "public",
+      });
+      mediaUrl = blob.url;
+    }
+
+    await prisma.project.update({
+      where: { id },
+      data: {
+        title,
+        slug,
+        type: formData.get("type") as string,
+        subcategory: formData.get("subcategory") as string,
+        status: formData.get("status") as string,
+        dateStart: formData.get("dateStart") as string || null,
+        dateEnd: formData.get("dateEnd") as string || null,
+        role: formData.get("role") as string || null,
+        organization: formData.get("organization") as string || null,
+        url: formData.get("url") as string || null,
+        credentialId: formData.get("credentialId") as string || null,
+        compensation: formData.get("compensation") as string || null,
+        achievement: formData.get("achievement") as string || null,
+        ...(mediaUrl && { media: mediaUrl }), // Only update media if a new file was uploaded
+        content: content,
+        livePreviewOnHome: formData.get("livePreviewOnHome") === "on",
+        livePreviewOnProject: formData.get("livePreviewOnProject") === "on",
+      },
+    });
+
+    revalidatePath("/");
+    revalidatePath("/admin/dashboard");
+    revalidatePath(`/projects/${slug}`);
+    return { success: true };
+  } catch (error: any) {
+    console.error("Failed to update project:", error);
+    return { success: false, error: error.message || "Failed to update project." };
+  }
+}
+
 export async function deleteProject(id: string) {
   try {
     const session = await getServerSession(authOptions as any);
@@ -75,5 +129,29 @@ export async function deleteProject(id: string) {
   } catch (error) {
     console.error("Failed to delete project:", error);
     return { success: false, error: "Failed to delete project." };
+  }
+}
+
+export async function uploadInlineImage(formData: FormData) {
+  try {
+    const session = await getServerSession(authOptions as any);
+    if (!session) {
+      throw new Error("Unauthorized action.");
+    }
+
+    const file = formData.get("file") as File;
+    if (!file || file.size === 0) {
+      throw new Error("No file provided.");
+    }
+
+    // Upload the file securely to Vercel's global CDN
+    const blob = await put(file.name, file, {
+      access: "public",
+    });
+    
+    return { success: true, url: blob.url };
+  } catch (error: any) {
+    console.error("Failed to upload inline image:", error);
+    return { success: false, error: error.message || "Failed to upload image." };
   }
 }
