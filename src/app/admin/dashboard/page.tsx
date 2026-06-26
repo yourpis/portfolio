@@ -12,10 +12,10 @@ export default async function AdminDashboard() {
     <main className="min-h-screen bg-[#050505] text-[#ededed] font-sans selection:bg-white/20 pb-32">
       <div className="fixed inset-0 z-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-neutral-900/30 via-[#050505] to-[#050505] pointer-events-none" />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-24">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 pt-[80px] lg:pt-[140px]">
         
         {/* Dashboard Header */}
-        <header className="flex flex-col md:flex-row md:items-center justify-between mb-12 gap-6">
+        <header className="flex flex-col md:flex-row md:items-center justify-between mb-8 md:mb-12 gap-4 md:gap-6">
           <div>
             <h1 className="text-4xl font-bold tracking-tight text-white mb-2">
               Command Center
@@ -25,14 +25,14 @@ export default async function AdminDashboard() {
           
           <Link 
             href="/admin/editor" 
-            className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-[9px] hover:bg-neutral-200 transition-colors"
+            className="inline-flex w-full md:w-auto items-center justify-center gap-2 px-6 py-3 bg-white text-black font-semibold rounded-[9px] hover:bg-neutral-200 transition-colors"
           >
             + Initialize New Protocol
           </Link>
         </header>
 
         {/* Analytics Overview Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-8 md:mb-12">
           <div className="p-6 rounded-[9px] bg-white/5 border border-white/10 backdrop-blur-md">
             <h3 className="text-neutral-400 text-sm font-medium mb-2">Total Deployments</h3>
             <p className="text-3xl font-bold text-white">{projects.length}</p>
@@ -74,7 +74,7 @@ export default async function AdminDashboard() {
                     </td>
                     <td className="px-6 py-4">{project.type}</td>
                     <td className="px-6 py-4">
-                      <span className="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded-md text-[10px] uppercase tracking-widest">
+                      <span className="px-2 py-1 bg-neutral-800 border border-neutral-700 rounded-[9px] text-[10px] uppercase tracking-widest">
                         {project.status}
                       </span>
                     </td>

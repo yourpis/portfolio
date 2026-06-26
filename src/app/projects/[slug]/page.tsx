@@ -31,7 +31,7 @@ export default async function ProjectDetailPage({
   return (
     <main className="min-h-screen font-sans selection:bg-white/20 bg-[#141414]">
       {/* Top Section: RGB 0 */}
-      <div className="bg-black pt-24 md:pt-40 px-5 sm:px-6 md:px-8">
+      <div className="bg-black pt-[80px] lg:pt-[140px] px-5 sm:px-6 md:px-8">
         <div className="max-w-4xl mx-auto">
           {/* Back Button */}
           <BackButton />
@@ -97,7 +97,7 @@ export default async function ProjectDetailPage({
                 >
                   <div className="flex flex-col justify-center gap-0.5 md:gap-1">
                     <span className="text-[9px] md:text-[11px] font-bold tracking-widest text-neutral-500 uppercase leading-none">Visit Site</span>
-                    <span className="text-base sm:text-lg md:text-xl font-black truncate max-w-[130px] sm:max-w-[200px] md:max-w-md lg:max-w-lg leading-none mt-[1px] md:mt-0">
+                    <span className="text-base sm:text-lg md:text-xl font-black truncate max-w-[160px] sm:max-w-[220px] md:max-w-md lg:max-w-lg leading-none mt-[1px] md:mt-0">
                       {project.url.replace(/^https?:\/\/(www\.)?/, '')}
                     </span>
                   </div>
@@ -135,7 +135,7 @@ export default async function ProjectDetailPage({
               {project.title}
             </h1>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 mt-8 md:mt-10 pb-8 md:pb-10 border-b border-neutral-800/50 mb-8 md:mb-10">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-12 mt-8 md:mt-10 pb-8 md:pb-10 border-b border-neutral-800/50 mb-8 md:mb-10">
               {project.role && (
                 <div className="flex flex-col gap-1 md:gap-1.5">
                   <span className="text-[10px] tracking-widest text-neutral-500 uppercase font-bold">Role</span>

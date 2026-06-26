@@ -116,13 +116,13 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
   };
 
   // Antigravity Glassmorphism Input Styling
-  const inputClass = "w-full bg-white/5 border border-white/10 rounded-[9px] px-4 py-3 text-white placeholder-white/30 focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/50 transition-all";
+  const inputClass = "w-full bg-white/5 border border-white/10 rounded-[9px] px-4 py-3 text-base text-white placeholder-white/30 focus:outline-none focus:border-white/50 focus:ring-1 focus:ring-white/50 transition-all";
 
   return (
-    <div className="min-h-screen bg-[#050505] text-[#ededed] p-8 font-sans">
+    <div className="min-h-screen bg-[#050505] text-[#ededed] px-6 pt-[80px] lg:pt-[140px] pb-32 font-sans">
       <div className="max-w-5xl mx-auto">
         
-        <header className="mb-10">
+        <header className="mb-8 lg:mb-10 text-center md:text-left">
           <h1 className="text-4xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-b from-white to-neutral-500">
             {initialData ? "Update Protocol" : "Initialize New Protocol"}
           </h1>
@@ -131,7 +131,7 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
 
         <form onSubmit={handleSubmit} className="space-y-8">
           {/* Metadata Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 rounded-[9px] bg-white/5 border border-white/10 backdrop-blur-md">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 p-4 md:p-6 rounded-[9px] bg-white/5 border border-white/10 backdrop-blur-md">
             
             <div className="space-y-2">
               <label className="text-sm text-neutral-400 font-medium">Title *</label>
@@ -258,7 +258,7 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
                 name="mediaFile" 
                 type="file" 
                 accept="image/*,video/*"
-                className="w-full bg-[#0a0a0a] border border-white/10 rounded-[9px] px-4 py-2 text-neutral-400 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 transition-all cursor-pointer" 
+                className="w-full bg-[#0a0a0a] border border-white/10 rounded-[9px] px-4 py-2 text-neutral-400 focus:outline-none file:mr-4 file:py-2 file:px-4 file:rounded-[9px] file:border-0 file:text-sm file:font-semibold file:bg-white/10 file:text-white hover:file:bg-white/20 transition-all cursor-pointer" 
               />
               {initialData?.media && (
                 <p className="text-xs text-neutral-500 mt-1">Leave empty to keep existing media.</p>
