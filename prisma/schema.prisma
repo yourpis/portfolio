@@ -35,6 +35,10 @@ model Project {
   // Admin Analytics
   views        Int      @default(0)
   
+  // Live Preview feature
+  livePreviewOnHome    Boolean @default(false)
+  livePreviewOnProject Boolean @default(false)
+  
   // Auto-timestamps
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt

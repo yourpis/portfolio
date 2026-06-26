@@ -134,7 +134,9 @@ export default async function Home() {
             {items.map((item) => (
               <Link href={`/projects/${item.slug}`} key={item.id} className="group outline-none flex flex-col gap-4">
                 <div className="relative w-full aspect-video rounded-[9px] overflow-hidden bg-neutral-900 transition-all duration-500">
-                  {item.media ? (
+                  {item.livePreviewOnHome && item.url ? (
+                    <iframe src={item.url} className="w-full h-full border-none pointer-events-none" />
+                  ) : item.media ? (
                     item.media.match(/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i) ? (
                       <video src={item.media} autoPlay loop muted playsInline className="object-cover w-full h-full" />
                     ) : (
@@ -145,8 +147,18 @@ export default async function Home() {
                       <span className="opacity-[0.03] font-sans font-black text-[8rem] tracking-tighter">{item.title.substring(0, 2).toUpperCase()}</span>
                     </div>
                   )}
-                  <div className="absolute bottom-3 right-3 bg-black/80 backdrop-blur-md px-2 py-1 rounded-md text-[10px] font-bold text-white tracking-widest uppercase">
-                    {item.status}
+                  <div className="absolute bottom-3 right-3 bg-white text-black px-2 py-1 text-[10px] font-sans font-black tracking-widest uppercase mix-blend-difference z-20">
+                    <Shuffle
+                      text={item.status}
+                      shuffleDirection="up"
+                      duration={0.35}
+                      animationMode="evenodd"
+                      shuffleTimes={1}
+                      ease="power3.out"
+                      stagger={0.03}
+                      triggerOnHover={true}
+                      tag="span"
+                    />
                   </div>
                 </div>
 

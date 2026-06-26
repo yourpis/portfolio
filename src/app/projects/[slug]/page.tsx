@@ -36,22 +36,56 @@ export default async function ProjectDetailPage({
           {/* Back Button */}
           <BackButton />
 
-          {/* Project Cover Image */}
-          {project.media && (
+          {/* Project Cover Image or Live Preview */}
+          {(project.media || (project.livePreviewOnProject && project.url)) && (
             <div className="w-full aspect-video overflow-hidden mb-8 md:mb-10 relative group">
-              {project.media.match(/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i) ? (
+              {project.livePreviewOnProject && project.url ? (
+                <div className="w-full h-full flex flex-col bg-white">
+                  {/* Safari Browser Chrome */}
+                  <div className="h-10 sm:h-12 bg-[#f6f6f6] border-b border-black/5 flex items-center justify-between px-3 sm:px-4 relative shrink-0">
+                    <div className="flex items-center gap-4">
+                      <div className="flex gap-1.5 sm:gap-2">
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ff5f56] border border-black/5" />
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#ffbd2e] border border-black/5" />
+                        <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-[#27c93f] border border-black/5" />
+                      </div>
+                      <div className="hidden sm:flex items-center gap-3 text-neutral-400">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                      </div>
+                    </div>
+                    
+                    <div className="absolute left-1/2 -translate-x-1/2 w-[50%] max-w-[350px] h-6 sm:h-7 bg-white border border-black/5 rounded-md shadow-sm flex items-center justify-center px-3 gap-1.5 overflow-hidden">
+                      <svg width="10" height="10" viewBox="0 0 24 24" fill="currentColor" className="text-neutral-800 shrink-0"><path d="M19 11H5C3.89543 11 3 11.8954 3 13V20C3 21.1046 3.89543 22 5 22H19C20.1046 22 21 21.1046 21 20V13C21 11.8954 20.1046 11 19 11ZM12 18C11.1716 18 10.5 17.3284 10.5 16.5C10.5 15.6716 11.1716 15 12 15C12.8284 15 13.5 15.6716 13.5 16.5C13.5 17.3284 12.8284 18 12 18ZM17 11V7C17 4.23858 14.7614 2 12 2C9.23858 2 7 4.23858 7 7V11H17Z"/></svg>
+                      <span className="text-[9px] sm:text-[11px] text-neutral-800 font-medium font-sans truncate">
+                        {project.url.replace(/^https?:\/\/(www\.)?/, '')}
+                      </span>
+                    </div>
+
+                    <div className="hidden sm:flex items-center gap-3 text-neutral-400">
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect></svg>
+                    </div>
+                  </div>
+                  {/* Browser Content */}
+                  <div className="flex-1 w-full relative bg-white">
+                    <iframe src={project.url} className="w-full h-full border-none absolute inset-0" />
+                  </div>
+                </div>
+              ) : project.media?.match(/\.(mp4|webm|ogg|mov|m4v)(\?.*)?$/i) ? (
                 <video
                   src={project.media}
                   autoPlay loop muted playsInline
                   className="w-full h-full object-cover"
                 />
-              ) : (
+              ) : project.media ? (
                 <img
                   src={project.media}
                   alt={`${project.title} cover`}
                   className="w-full h-full object-cover"
                 />
-              )}
+              ) : null}
 
               {/* Optional Website Link Overlay */}
               {project.url && (

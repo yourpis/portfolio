@@ -146,6 +146,18 @@ export default function AdminEditor() {
               <input name="url" type="url" placeholder="https://..." className={inputClass} />
             </div>
 
+            <div className="space-y-3 flex flex-col justify-center">
+              <label className="text-sm text-neutral-400 font-medium">Live Preview Options</label>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" name="livePreviewOnHome" id="livePreviewOnHome" className="w-4 h-4 accent-white bg-white/10" />
+                <label htmlFor="livePreviewOnHome" className="text-sm text-neutral-300 cursor-pointer">Show on Homepage</label>
+              </div>
+              <div className="flex items-center gap-2">
+                <input type="checkbox" name="livePreviewOnProject" id="livePreviewOnProject" className="w-4 h-4 accent-white bg-white/10" />
+                <label htmlFor="livePreviewOnProject" className="text-sm text-neutral-300 cursor-pointer">Show on Project Page</label>
+              </div>
+            </div>
+
             <div className="space-y-2">
               <label className="text-sm text-neutral-400 font-medium">Cover Image/Video Upload</label>
               <input 

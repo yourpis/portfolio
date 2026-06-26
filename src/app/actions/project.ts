@@ -45,6 +45,8 @@ export async function createProject(formData: FormData, content: string) {
         achievement: formData.get("achievement") as string || null,
         media: mediaUrl, // Save the Vercel Blob URL to Neon!
         content: content,
+        livePreviewOnHome: formData.get("livePreviewOnHome") === "on",
+        livePreviewOnProject: formData.get("livePreviewOnProject") === "on",
       },
     });
 
