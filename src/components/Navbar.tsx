@@ -49,7 +49,7 @@ export default function Navbar() {
             </span>
             
             {/* The actual CONNECT text absolutely positioned in the exact center */}
-            <span className="absolute inset-0 flex items-center justify-center font-sans font-black uppercase tracking-widest text-[0.45rem] md:text-[0.95rem] leading-none">
+            <span className="absolute inset-0 flex items-center justify-center font-sans font-black uppercase tracking-widest text-[10px] md:text-[0.95rem] leading-none">
               <span className="translate-x-[0.05em] translate-y-[0.08em] block">
                 <Shuffle
                   text="CONNECT"

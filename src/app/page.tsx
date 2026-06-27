@@ -97,13 +97,13 @@ export default async function Home() {
               <span className="font-serif italic font-normal text-neutral-600 mt-2">Stories.</span>
             </h1>
 
-            <p className="mt-2 mb-6 lg:mt-4 lg:mb-10 text-neutral-600 font-sans text-[10px] sm:text-[11px] md:text-base lg:text-lg xl:text-xl max-w-full lg:max-w-md xl:max-w-lg leading-relaxed text-left z-20 relative pr-2">
+            <p className="mt-2 mb-6 lg:mt-4 lg:mb-10 text-neutral-600 font-sans text-xs sm:text-sm md:text-base lg:text-lg xl:text-xl max-w-full lg:max-w-md xl:max-w-lg leading-relaxed text-left z-20 relative pr-2">
               I am Tubagus Dafa, a software engineer and director. I build full-stack web platforms, embedded hardware, and stories.
             </p>
 
             <div className="relative">
               <div className="flex items-center gap-6 relative z-20 mix-blend-difference">
-                <SmoothScrollLink targetId="projects" href="#projects" className="inline-flex items-center justify-center bg-white text-black px-3 md:px-10 h-[2rem] md:h-[3.5rem] font-sans font-black uppercase tracking-widest text-[0.55rem] md:text-[0.9rem] leading-none">
+                <SmoothScrollLink targetId="projects" href="#projects" className="inline-flex items-center justify-center bg-white text-black px-6 md:px-10 h-[2.75rem] md:h-[3.5rem] font-sans font-black uppercase tracking-widest text-[10px] md:text-[0.9rem] leading-none">
                   <Shuffle
                     text="VIEW PROJECTS"
                     shuffleDirection="up"

@@ -25,7 +25,7 @@ export default function ContactPage() {
             <h2 className="text-2xl font-semibold text-white mb-6">Direct Payload</h2>
             
             {/* The Recruiter Fast-Track Form */}
-            <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" className="space-y-5">
+            <form action="https://formspree.io/f/xqevzplv" method="POST" className="space-y-5">
               
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-2">
@@ -33,7 +33,7 @@ export default function ContactPage() {
                   <input required name="company" type="text" placeholder="e.g. GoTo, Shopee..." className={inputClass} />
                 </div>
                 <div className="space-y-2">
-                  <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Recruiter Email</label>
+                  <label className="text-xs text-neutral-400 font-medium uppercase tracking-wider">Email</label>
                   <input required name="email" type="email" placeholder="talent@company.com" className={inputClass} />
                 </div>
               </div>
@@ -45,6 +45,9 @@ export default function ContactPage() {
                   <option value="Backend Engineer" className="bg-neutral-900">Backend Engineer</option>
                   <option value="Frontend Engineer" className="bg-neutral-900">Frontend / Next.js Engineer</option>
                   <option value="Embedded Systems" className="bg-neutral-900">Embedded Systems / Hardware</option>
+                  <option value="Creative Technologist" className="bg-neutral-900">Creative Technologist / WebGL</option>
+                  <option value="Technical Director" className="bg-neutral-900">Technical Director / Tech Lead</option>
+                  <option value="Freelance" className="bg-neutral-900">Freelance / Project Consultation</option>
                 </select>
               </div>
 
@@ -55,6 +58,8 @@ export default function ContactPage() {
                     <option value="Remote" className="bg-neutral-900">100% Remote</option>
                     <option value="Hybrid (Jakarta)" className="bg-neutral-900">Hybrid (Jakarta Area)</option>
                     <option value="On-Site" className="bg-neutral-900">On-Site</option>
+                    <option value="Project-Based" className="bg-neutral-900">Project-Based / Contract</option>
+                    <option value="Consulting" className="bg-neutral-900">Consulting / Retainer</option>
                   </select>
                 </div>
                 <div className="space-y-2">
@@ -84,7 +89,6 @@ export default function ContactPage() {
             
             {/* Cal.com Embed Container */}
             <div className="flex-grow w-full rounded-[9px] overflow-hidden bg-[#0a0a0a] border border-white/10 relative min-h-[400px]">
-              {/* Replace this iframe src with your actual Cal.com or Calendly link */}
               <iframe 
                 src="https://cal.com/tubagusdafa?theme=dark" 
                 width="100%" 

@@ -351,6 +351,12 @@ const Shuffle: React.FC<ShuffleProps> = ({
 
       const armHover = () => {
         if (!triggerOnHover || !ref.current) return;
+
+        // Prevent hover effects on touch/mobile devices
+        if (window.matchMedia && !window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+          return;
+        }
+
         removeHover();
         const handler = () => {
           if (playingRef.current) return;

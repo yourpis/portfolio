@@ -15,7 +15,7 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
   
   // Set the selected domain to initial subcategory. If it doesn't match standard options, we set it to 'Other'.
   // However, simpler is just initializing it to whatever it was. 
-  const isCustomDomain = initialData?.subcategory && !["Web Development", "Embedded Systems & IoT", "Hardware & Digital Design", "Game Development", "Human-Computer Interaction (HCI)", "Software Engineering", "Cybersecurity", "Data Science & AI"].includes(initialData.subcategory);
+  const isCustomDomain = initialData?.subcategory && !["Web Development", "Embedded Systems & IoT", "Hardware & Digital Design", "Game Development", "Human-Computer Interaction (HCI)", "Software Engineering", "Cybersecurity", "Data Science & AI", "Creative Coding & WebGL", "UI/UX & Product Design", "AR/VR & Spatial Computing"].includes(initialData.subcategory);
   
   const [selectedDomain, setSelectedDomain] = useState(isCustomDomain ? "Other" : (initialData?.subcategory || "Web Development"));
   const [isPresent, setIsPresent] = useState(initialData?.dateEnd === 'Present');
@@ -143,9 +143,12 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
               <select required name="type" defaultValue={initialData?.type} className={inputClass + " appearance-none"}>
                 <option value="Personal Project" className="bg-neutral-900">Personal Project</option>
                 <option value="Academic / University" className="bg-neutral-900">Academic / University</option>
-                <option value="Professional / Client Work" className="bg-neutral-900">Professional / Client Work</option>
+                <option value="Agency / Client Work" className="bg-neutral-900">Agency / Client Work</option>
+                <option value="In-House / Enterprise" className="bg-neutral-900">In-House / Enterprise</option>
                 <option value="Hackathon / Competition" className="bg-neutral-900">Hackathon / Competition</option>
                 <option value="Open Source" className="bg-neutral-900">Open Source</option>
+                <option value="R&D / Experimental" className="bg-neutral-900">R&D / Experimental</option>
+                <option value="Art Installation / Exhibition" className="bg-neutral-900">Art Installation / Exhibition</option>
               </select>
             </div>
 
@@ -167,6 +170,9 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
                   <option value="Software Engineering" className="bg-neutral-900">Software Engineering</option>
                   <option value="Cybersecurity" className="bg-neutral-900">Cybersecurity</option>
                   <option value="Data Science & AI" className="bg-neutral-900">Data Science & AI</option>
+                  <option value="Creative Coding & WebGL" className="bg-neutral-900">Creative Coding & WebGL</option>
+                  <option value="UI/UX & Product Design" className="bg-neutral-900">UI/UX & Product Design</option>
+                  <option value="AR/VR & Spatial Computing" className="bg-neutral-900">AR/VR & Spatial Computing</option>
                   <option value="Other" className="bg-neutral-900">Other (Custom)</option>
                 </select>
               ) : (
@@ -198,7 +204,11 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
                 <option value="Production" className="bg-neutral-900">Production</option>
                 <option value="Deployed" className="bg-neutral-900">Deployed</option>
                 <option value="Ongoing" className="bg-neutral-900">Ongoing</option>
-                <option value="Resigned" className="bg-neutral-900">Resigned</option>
+                <option value="Prototype" className="bg-neutral-900">Prototype</option>
+                <option value="Beta" className="bg-neutral-900">Beta</option>
+                <option value="Archived" className="bg-neutral-900">Archived</option>
+                <option value="Deprecated" className="bg-neutral-900">Deprecated</option>
+                <option value="Halted" className="bg-neutral-900">Halted</option>
               </select>
             </div>
 
@@ -231,8 +241,8 @@ export default function ProjectForm({ initialData }: { initialData?: any }) {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm text-neutral-400 font-medium">Organization</label>
-              <input name="organization" type="text" defaultValue={initialData?.organization || ''} placeholder="e.g. BEM UI" className={inputClass} />
+              <label className="text-sm text-neutral-400 font-medium">Client / Brand</label>
+              <input name="organization" type="text" defaultValue={initialData?.organization || ''} placeholder="e.g. XYZ Agency, Independent" className={inputClass} />
             </div>
 
             <div className="space-y-2">
